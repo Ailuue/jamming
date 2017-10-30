@@ -72,6 +72,11 @@ let Spotify = {
                   body: trackUris
                 }
               )
+                .then(response => response.json())
+                .then(jsonResponse => {
+                  playlistId = jsonResponse.id;
+                  return playlistId;
+                })
             )
         );
     } else {
