@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Track from '../Track/Track';
+import './TrackList.css';
 
 class TrackList extends Component {
   render() {
@@ -12,6 +13,7 @@ class TrackList extends Component {
               track={track}
               onAdd={this.props.onAdd}
               onRemove={this.props.onRemove}
+              isRemoval={this.props.isRemoval}
             />
           );
         })}

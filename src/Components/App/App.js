@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar.js';
-import SearchResults from '../SearchBar/SearchBar.js';
+import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
 import Spotify from '../../util/Spotify';
 
@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      SearchResults: '',
+      SearchResults: [],
       playlistName: playlistName,
       playlistTracks: playlistTracks
     };
@@ -26,7 +26,6 @@ class App extends Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
-    this.testSpotify = this.testSpotify.bind(this);
   }
 
   addTrack(track) {
@@ -59,10 +58,9 @@ class App extends Component {
   }
 
   search(term) {
-    console.log(term);
-  }
-  testSpotify() {
-    Spotify.getAccessToken();
+    Spotify.search(term).then(response =>
+      this.setState({ searchResults: response })
+    );
   }
 
   render() {
@@ -85,7 +83,6 @@ class App extends Component {
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
             />
-            <button onClick={this.testSpotify}>Test</button>
           </div>
         </div>
       </div>
