@@ -20,7 +20,7 @@ let Spotify = {
       window.location = accessUrl;
     }
   },
-  search: term => {
+  search(term) {
     const accessToken = Spotify.getAccessToken();
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
       headers: {
@@ -41,44 +41,36 @@ let Spotify = {
         }));
       });
   },
-  savePlaylist: (playlistName, trackUris) => {
-    if (playlistName && trackUris) {
+  savePlaylist(name, trackUris) {
+    if (name && trackUris) {
       const accessToken = Spotify.getAccessToken();
       const headers = {
         Authorization: `Bearer ${accessToken}`
       };
       let userId;
-      let playlistId;
-      return fetch(`https://api.spotify.com/v1/me`, { headers: headers })
+
+      return fetch('https://api.spotify.com/v1/me', { headers: headers })
         .then(response => response.json())
-        .then(jsonResponse => (userId = jsonResponse.id))
-        .then(
-          fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        .then(jsonResponse => {
+          userId = jsonResponse.id;
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
             headers: headers,
             method: 'POST',
-            body: playlistName
+            body: JSON.stringify({ name: name })
           })
             .then(response => response.json())
             .then(jsonResponse => {
-              playlistId = jsonResponse.id;
-              return playlistId;
-            })
-            .then(
-              fetch(
+              const playlistId = jsonResponse.id;
+              return fetch(
                 `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
                 {
                   headers: headers,
                   method: 'POST',
-                  body: trackUris
+                  body: JSON.stringify({ uris: trackUris })
                 }
-              )
-                .then(response => response.json())
-                .then(jsonResponse => {
-                  playlistId = jsonResponse.id;
-                  return playlistId;
-                })
-            )
-        );
+              );
+            });
+        });
     } else {
       return;
     }

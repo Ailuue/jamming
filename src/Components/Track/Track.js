@@ -7,6 +7,7 @@ class Track extends Component {
 
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.renderAction = this.renderAction.bind(this);
   }
 
   renderAction() {
@@ -42,7 +43,7 @@ class Track extends Component {
             {this.props.track.artist} | {this.props.track.album}
           </p>
         </div>
-        {this.renderAction}
+        {this.renderAction()}
       </div>
     );
   }
