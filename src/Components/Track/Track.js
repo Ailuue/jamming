@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Track.css';
 
+//Generates tracks for SearchResults and Playlist. Probably could be a function, but left as a class for simplicity
 class Track extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ class Track extends Component {
     this.renderAction = this.renderAction.bind(this);
   }
 
+  //Determines whether the track is for Playlist or SearchResults
   renderAction() {
     if (this.props.isRemoval) {
       return (

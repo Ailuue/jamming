@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TrackList from '../TrackList/TrackList';
 import './SearchResults.css';
 
+//Container for tracks from SearchBar
 class SearchResults extends Component {
   render() {
     return (

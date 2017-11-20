@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TrackList from '../TrackList/TrackList';
 import './Playlist.css';
 
+// Container for tracks in the users playlist - can be removed with a '-' button since "isRemoval" is true
 class PlayList extends Component {
   constructor(props) {
     super(props);

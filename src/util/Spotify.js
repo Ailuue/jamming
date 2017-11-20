@@ -1,3 +1,5 @@
+//Ajax call to the Spotify API. Generates an access token if none is found, then searches for the song using credentials. Also sets an expiration for the token. A POST is added to save the playlist to the user's account.
+
 const ID = 'fec64b6ba5194c2f9d43ccfedb8ac089';
 const URI = 'http://localhost:3000/';
 let accessToken;

@@ -5,6 +5,8 @@ import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
 import Spotify from '../../util/Spotify';
 
+// Container for App. Includes SearchBar, Search Results, and Playlist
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ class App extends Component {
     this.search = this.search.bind(this);
   }
 
+  //If track is not found in playlist, adds the track
   addTrack(track) {
     let found = false;
     this.state.playlistTracks.forEach(checkTrack => {
@@ -52,6 +55,7 @@ class App extends Component {
     this.setState({ playlistName: 'New Playlist', playlistTracks: [] });
   }
 
+  //Calls on the util file to run the AJAX call for Spotify API, then sets state
   search(term) {
     Spotify.search(term).then(response =>
       this.setState({ SearchResults: response })

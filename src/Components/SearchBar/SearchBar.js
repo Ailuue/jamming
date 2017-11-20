@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
 
+//Allows user to search for a new song/artist
 class SearchBar extends Component {
   constructor(props) {
     super(props);
